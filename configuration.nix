@@ -95,6 +95,13 @@
   # Install firefox.
   programs.firefox.enable = true;
 
+  programs.clash-verge = {
+    enable = true;
+    autoStart = true;
+    serviceMode = true;
+    tunMode = true;
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -103,9 +110,13 @@
   environment.systemPackages = with pkgs; [
      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
      git
-  #  wget
+     wget
+     vscode
+     neovim
+     codex
+     kitty
   ];
-
+  
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -139,4 +150,9 @@
   };
 
   services.blueman.enable = true;
+
+  nix.settings.substituters = [
+    "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
+    "https://cache.nixos.org/"
+  ];
 }
