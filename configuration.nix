@@ -45,6 +45,32 @@
     LC_TIME = "zh_CN.UTF-8";
   };
 
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+
+    fcitx5 = {
+      addons = with pkgs; [
+        # 中文拼音、双拼等常用中文输入
+        # fcitx5-chinese-addons
+	qt6Packages.fcitx5-chinese-addons
+
+        # 可选：Rime / 中州韵输入法
+        fcitx5-rime
+
+        # GTK 程序支持，比如 Firefox、GNOME 程序
+        fcitx5-gtk
+
+        # KDE / Qt 程序支持和配置工具
+        kdePackages.fcitx5-qt
+        kdePackages.fcitx5-configtool
+      ];
+
+      # 如果你用 Wayland，建议打开
+      waylandFrontend = true;
+    };
+  };
+
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
