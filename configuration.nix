@@ -145,6 +145,9 @@
      kitty
      qq
      wechat
+     chromium
+     tree
+     fastfetch
   ];
   
   # Some programs need SUID wrappers, can be configured further or are
@@ -184,5 +187,28 @@
   nix.settings.substituters = [
     "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
     "https://cache.nixos.org/"
+  ];
+
+  programs.steam = {
+    enable = true; # Master switch, already covered in installation
+    remotePlay.openFirewall = true;  # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports for Source Dedicated Server hosting
+    # Other general flags if available can be set here.
+    extraPackages = with pkgs; [
+      kdePackages.breeze
+      adwaita-icon-theme
+      hicolor-icon-theme
+    ];
+  };
+
+  environment.sessionVariables = {
+    XCURSOR_THEME = "breeze";
+    XCURSOR_SIZE = "48";
+  };
+
+  programs.gamemode.enable = true;
+  
+  programs.steam.extraCompatPackages = with pkgs; [
+    proton-ge-bin
   ];
 }
