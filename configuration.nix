@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./wechat.nix
     ];
 
   # Bootloader.
@@ -21,8 +22,8 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  networking.proxy.default = "http://127.0.0.1:7897";
+  networking.proxy.noProxy = "127.0.0.1,localhost,::1";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -141,6 +142,8 @@
      neovim
      codex
      kitty
+     qq
+     wechat
   ];
   
   # Some programs need SUID wrappers, can be configured further or are
