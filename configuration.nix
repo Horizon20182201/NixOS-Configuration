@@ -211,4 +211,35 @@
   programs.steam.extraCompatPackages = with pkgs; [
     proton-ge-bin
   ];
+
+  hardware.graphics.enable = true;
+
+  services.xserver.videoDrivers = [ "modesetting" "nvidia" ];
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+
+    # RTX 4060 属于较新的 NVIDIA 显卡，可以使用 open kernel module。
+    # 如果之后遇到黑屏、挂起恢复异常，可以把 true 改成 false 试试。
+    open = true;
+
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+    prime = {
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
+
+      # 根据你的 lspci 输出：
+      # Intel:  00:02.0
+      # NVIDIA: 32:00.0
+      #
+      # 注意：NixOS 这里要把 PCI bus id 从十六进制转成十进制。
+      # 0x32 = 50
+      intelBusId = "PCI:0@0:2:0";
+      nvidiaBusId = "PCI:50@0:0:0";
+    };
+  };
 }
