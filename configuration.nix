@@ -8,9 +8,12 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      <home-manager/nixos>
       ./wechat.nix
       ./fonts.nix
     ];
+
+  home-manager.users.lez = import ./home.nix;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -140,14 +143,17 @@
      git
      wget
      vscode
-     neovim
      codex
      kitty
      qq
      wechat
      chromium
-     tree
-     fastfetch
+     lutris
+     protonplus
+     gcc
+     gdb
+     python3
+     rustc
   ];
   
   # Some programs need SUID wrappers, can be configured further or are

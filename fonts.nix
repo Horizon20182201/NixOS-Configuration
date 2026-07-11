@@ -16,6 +16,12 @@
       # 中文兼容性较好的老牌字体
       wqy_microhei
       wqy_zenhei
+
+      # 编程用字体
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.fira-code
+      nerd-fonts.iosevka-term
+      nerd-fonts.caskaydia-mono
     ];
 
     fontconfig = {
