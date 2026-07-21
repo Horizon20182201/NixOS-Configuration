@@ -1,6 +1,15 @@
 { config, pkgs, ... }:
 
+let
+  unstable = import <nixos-unstable> {
+    system = pkgs.stdenv.hostPlatform.system;
+  };
+in
 {
+  imports = [
+    ./vscode.nix
+  ];
+
   home.username = "lez";
   home.homeDirectory = "/home/lez";
 
@@ -14,6 +23,8 @@
     bat
     neovim
     tree
+    unstable.codex
+    wpsoffice
   ];
 
   programs.git = {
@@ -38,6 +49,19 @@
     music = "${config.home.homeDirectory}/Music";
     pictures = "${config.home.homeDirectory}/Pictures";
     videos = "${config.home.homeDirectory}/Videos";
+  };
+
+  programs.ssh = {
+    enable = true;
+
+    # 避免启用 Home Manager 的旧版默认 SSH 配置
+    enableDefaultConfig = false;
+
+    settings."*" = {
+      ServerAliveInterval = 20;
+      ServerAliveCountMax = 120;
+      TCPKeepAlive = false;
+    };
   };
 
 }

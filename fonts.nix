@@ -18,6 +18,7 @@
       wqy_zenhei
 
       # 编程用字体
+      vista-fonts
       nerd-fonts.jetbrains-mono
       nerd-fonts.fira-code
       nerd-fonts.iosevka-term

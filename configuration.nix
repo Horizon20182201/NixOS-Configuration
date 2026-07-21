@@ -5,6 +5,11 @@
 { config, pkgs, ... }:
 
 {
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -13,6 +18,7 @@
       ./fonts.nix
     ];
 
+  home-manager.useGlobalPkgs = true;
   home-manager.users.lez = import ./home.nix;
 
   # Bootloader.
@@ -116,7 +122,7 @@
   users.users."lez" = {
     isNormalUser = true;
     description = "LEZ";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker"];
     packages = with pkgs; [
       kdePackages.kate
     #  thunderbird
@@ -142,8 +148,6 @@
      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
      git
      wget
-     vscode
-     codex
      kitty
      qq
      wechat
@@ -154,6 +158,8 @@
      gdb
      python3
      rustc
+     unzip
+     tigervnc
   ];
   
   # Some programs need SUID wrappers, can be configured further or are
@@ -248,4 +254,6 @@
       nvidiaBusId = "PCI:50@0:0:0";
     };
   };
+
+  virtualisation.docker.enable = true;
 }
