@@ -7,8 +7,8 @@ let
 in
 {
   imports = [
-    ./vscode.nix
-    ./zsh.nix
+    ./home/vscode.nix
+    ./home/zsh.nix
   ];
 
   home.username = "lez";
