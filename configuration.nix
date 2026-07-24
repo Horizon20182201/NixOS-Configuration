@@ -127,7 +127,10 @@
       kdePackages.kate
     #  thunderbird
     ];
+    shell = pkgs.zsh;
   };
+
+  programs.zsh.enable = true;
 
   # Install firefox.
   programs.firefox.enable = true;
@@ -160,6 +163,7 @@
      rustc
      unzip
      tigervnc
+     nmap
   ];
   
   # Some programs need SUID wrappers, can be configured further or are
@@ -256,4 +260,5 @@
   };
 
   virtualisation.docker.enable = true;
+
 }

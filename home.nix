@@ -8,6 +8,7 @@ in
 {
   imports = [
     ./vscode.nix
+    ./zsh.nix
   ];
 
   home.username = "lez";
@@ -29,11 +30,15 @@ in
 
   programs.git = {
     enable = true;
-    userName = "刘恩照";
-    userEmail = "1969197882@qq.com";
+    settings = {
+      user = {
+        name = "Enzhao Liu";
+        email = "ezliu822@gmail.com";
+      };
+    };
   };
 
-  programs.bash.enable = true;
+  # programs.bash.enable = true;
 
   xdg.enable = true;
 
@@ -57,7 +62,13 @@ in
     # 避免启用 Home Manager 的旧版默认 SSH 配置
     enableDefaultConfig = false;
 
-    settings."*" = {
+    settings."wangyi" = {
+      HostName = "10.176.56.235";
+      User = "wangyi";
+
+      ProxyCommand =
+        "${pkgs.nmap}/bin/ncat --proxy 127.0.0.1:1080 --proxy-type socks5 %h %p";
+
       ServerAliveInterval = 20;
       ServerAliveCountMax = 120;
       TCPKeepAlive = false;
