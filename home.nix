@@ -26,6 +26,8 @@ in
     tree
     unstable.codex
     wpsoffice
+    opencode
+    typora
   ];
 
   programs.git = {
@@ -66,8 +68,7 @@ in
       HostName = "10.176.56.235";
       User = "wangyi";
 
-      ProxyCommand =
-        "${pkgs.nmap}/bin/ncat --proxy 127.0.0.1:1080 --proxy-type socks5 %h %p";
+      # ProxyCommand = "${pkgs.nmap}/bin/ncat --proxy 127.0.0.1:1080 --proxy-type socks5 %h %p";
 
       ServerAliveInterval = 20;
       ServerAliveCountMax = 120;

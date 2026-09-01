@@ -23,6 +23,7 @@
       nerd-fonts.fira-code
       nerd-fonts.iosevka-term
       nerd-fonts.caskaydia-mono
+      corefonts
     ];
 
     fontconfig = {

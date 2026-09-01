@@ -22,11 +22,28 @@
   home-manager.users.lez = import ./home.nix;
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot = {
+      enable = true;
+
+      # 暂时启用，用来查找 Windows 所在 ESP 的 UEFI handle
+      # edk2-uefi-shell.enable = true;
+
+      windows."11" = {
+        title = "Windows 11";
+        efiDeviceHandle = "HD1b";
+        sortKey = "z_windows";
+      };
+    };
+
+    efi.canTouchEfiVariables = true;
+
+    # 开机时显示选择菜单 5 秒
+    timeout = 5;
+  };
 
   # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_7_1;
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -159,6 +176,9 @@
      protonplus
      gcc
      gdb
+     gnumake
+     cmake
+     bear
      python3
      rustc
      unzip
