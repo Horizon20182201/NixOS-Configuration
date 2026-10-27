@@ -14,6 +14,7 @@ in
     ./home/zsh.nix
     ./home/ssh.nix
     ./home/claude.nix
+    ./home/neovim.nix
   ];
 
   home.username = "lez";
@@ -28,7 +29,6 @@ in
     fd
     eza
     bat
-    neovim
     tree
     unstable.codex
     wpsoffice
@@ -47,9 +47,14 @@ in
     };
   };
 
-  # programs.bash.enable = true;
-
   xdg.enable = true;
+
+  xdg.configFile = {
+    # 不让 home-manager 管理 nvim 配置
+    "nvim" = {
+      enable = false;
+    };
+  };
 
   xdg.userDirs = {
     enable = true;
