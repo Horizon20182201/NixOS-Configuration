@@ -43,7 +43,7 @@
   };
 
   # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_7_1;
+  boot.kernelPackages = pkgs.linuxPackages_6_18;
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -145,6 +145,10 @@
     #  thunderbird
     ];
     shell = pkgs.zsh;
+
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDtYifPt55DF4bWumBgNJQBjwjGKeqQZnbkPbtcj4R4t liuenzhao@liuenzhaodeMacBook-Air.local"
+    ];
   };
 
   programs.zsh.enable = true;
@@ -197,10 +201,23 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+
+    # 自动允许防火墙的 SSH 端口
+    openFirewall = true;
+
+    settings = {
+      PermitRootLogin = "no";
+
+      # 只允许密钥登录
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+    };
+  };
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 9090 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
@@ -280,5 +297,10 @@
   };
 
   virtualisation.docker.enable = true;
+  
+  # 启用 tailscale
+  services.tailscale.enable = true;
 
+  # 启用 nix-ld
+  programs.nix-ld.enable = true;
 }

@@ -36,7 +36,7 @@
           "'Consolas', 'JetBrains Mono', 'Noto Sans Mono CJK SC', monospace";
 	"workbench.colorTheme" = "One Dark Pro";
 	"git.autofetch" = true;
-	"terminal.integrated.fontFamily" = "Noto Sans Mono CJK SC";
+	"terminal.integrated.fontFamily" = "Maple Mono NF";
       };
     };
   };
