@@ -3,13 +3,17 @@
 let
   unstable = import <nixos-unstable> {
     system = pkgs.stdenv.hostPlatform.system;
+    config.allowUnfree = true;
   };
 in
 {
+  _module.args.unstable = unstable;
+
   imports = [
     ./home/vscode.nix
     ./home/zsh.nix
     ./home/ssh.nix
+    ./home/claude.nix
   ];
 
   home.username = "lez";
@@ -30,6 +34,7 @@ in
     wpsoffice
     opencode
     typora
+    unstable.cc-switch-cli
   ];
 
   programs.git = {
