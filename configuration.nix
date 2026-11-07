@@ -185,6 +185,7 @@
      bear
      python3
      rustc
+     cargo
      unzip
      tigervnc
      nmap

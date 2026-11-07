@@ -49,13 +49,6 @@ in
 
   xdg.enable = true;
 
-  xdg.configFile = {
-    # 不让 home-manager 管理 nvim 配置
-    "nvim" = {
-      enable = false;
-    };
-  };
-
   xdg.userDirs = {
     enable = true;
     createDirectories = true;

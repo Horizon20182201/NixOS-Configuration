@@ -7,6 +7,9 @@
     viAlias = true;
     vimAlias = true;
 
+    # 通过 wrapper 加载 Nix 生成的配置，保留本地 LazyVim 的 init.lua。
+    sideloadInitLua = true;
+
     # 运行时依赖
     withNodeJs = true;
     withPython3 = true;

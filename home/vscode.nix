@@ -3,6 +3,15 @@
 {
   programs.vscode = {
     enable = true;
+
+    # 临时修复 NixOS 26.05 的旧打包路径，适用于当前 x86_64-linux 主机。
+    # VS Code 1.144.0 使用 ripgrep-universal；上游修复后可移除此覆盖。
+    package = pkgs.vscode.overrideAttrs (oldAttrs: {
+      postPatch = builtins.replaceStrings
+        [ "@vscode/ripgrep/bin/rg" ]
+        [ "@vscode/ripgrep-universal/bin/linux-x64/rg" ]
+        oldAttrs.postPatch;
+    });
     
     profiles.default = {
 
